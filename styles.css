@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&family=Inter:wght@400;600;700&family=Rubik+Moonrocks&family=Rubik+Wet+Paint&display=swap");
+
+:root {
+  --black-color: #150312;
+  --gray-color: #3b2c38;
+  --yellow-color: #ffbc39;
+  --white-color: #e8e8e8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--black-color);
+  color: var(--white-color);
+  font-family: "Inter", sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: var(--yellow-color);
+  font-size: 4em;
+  text-transform: uppercase;
+  margin-top: 60px;
+  margin-bottom: 36px;
+}
+
+.rock-font {
+  font-family: "Rubik Moonrocks", cursive;
+}
+
+.paper-font {
+  font-family: "Annie Use Your Telescope", cursive;
+}
+
+.scissors-font {
+  font-family: "Rubik Wet Paint", cursive;
+}
+
+.scores {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: 2.25em;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.human-score,
+.computer-score {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--white-color);
+  color: var(--black-color);
+  outline: 4px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+  width: 60px;
+  height: 68px;
+}
+
+.winner {
+  font-size: 1.75em;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.hide-winner {
+  visibility: hidden;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 128px;
+  margin-bottom: 100px;
+  font-size: 1.75em;
+  font-weight: 600;
+}
+
+.human,
+.computer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.tools {
+  display: flex;
+  gap: 20px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.tool {
+  background-color: rgba(255, 255, 255, 0.16);
+  padding: 60px;
+  border: none;
+  border-radius: 50%;
+}
+
+.yellow-background {
+  background-color: var(--yellow-color);
+}
+
+.rock {
+  background-image: url("./images/rock.png");
+}
+
+.paper {
+  background-image: url("./images/paper.png");
+}
+
+.scissors {
+  background-image: url("./images/scissors.png");
+}
+
+.rock,
+.paper,
+.scissors {
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tool:hover {
+  background-color: var(--yellow-color);
+}
+
+.tool[disabled] {
+  pointer-events: none;
+}
+
+.play-again {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: 600;
+  background-color: transparent;
+  color: var(--yellow-color);
+  border: none;
+}
