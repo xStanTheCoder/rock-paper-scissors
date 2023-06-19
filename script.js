@@ -16,7 +16,7 @@ let computerChoice = "";
 // EVENT LISTENERS
 humanTools.forEach((item) => {
   item.addEventListener("click", (e) => {
-    e.target.classList.add("yellow-backround");
+    e.target.classList.add("yellow-background");
     humanChoice = e.target.getAttribute("name");
     computerChoice = getComputerChoice();
     computerTools.forEach((item) => {
@@ -39,7 +39,8 @@ playAgain.addEventListener("click", () => {
   humanTools.forEach((item) => {
     item.removeAttribute("disabled");
   });
-  winnerMessage.classList.add("hide-winner");
+  winnerMessage.classList.add("hide");
+  playAgain.classList.add("hide");
 });
 
 // FUNCTIONS
@@ -69,14 +70,15 @@ function playRound(humanChoice, computerChoice, humanTargetEvent) {
       }
     });
     humanTargetEvent.target.classList.remove("yellow-background");
-  }, 500);
+  }, 2000);
 }
 
 function endGame(humanScoreValue, computerScoreValue) {
   if (humanScoreValue === 5 || computerScoreValue === 5) {
     const winner = humanScoreValue === 5 ? "Player" : "Computer";
     winnerMessage.textContent = "WINNER: " + winner;
-    winnerMessage.classList.remove("hide-winner");
+    winnerMessage.classList.remove("hide");
+    playAgain.classList.remove("hide");
     humanTools.forEach((item) => {
       item.disabled = true;
     });
