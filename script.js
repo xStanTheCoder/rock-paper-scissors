@@ -75,7 +75,7 @@ function playRound(humanChoice, computerChoice, humanTargetEvent) {
 
 function endGame(humanScoreValue, computerScoreValue) {
   if (humanScoreValue === 5 || computerScoreValue === 5) {
-    const winner = humanScoreValue === 5 ? "Player" : "Computer";
+    const winner = humanScoreValue === 5 ? "PLAYER" : "COMPUTER";
     winnerMessage.textContent = "WINNER: " + winner;
     winnerMessage.classList.remove("hide");
     playAgain.classList.remove("hide");

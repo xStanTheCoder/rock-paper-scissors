@@ -138,6 +138,7 @@ button {
 
 .tool:hover {
   background-color: var(--yellow-color);
+  box-shadow: 0px 0px 24px rgba(255, 188, 57, 0.88);
 }
 
 .tool[disabled] {
