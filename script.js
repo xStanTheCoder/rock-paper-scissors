@@ -15,48 +15,49 @@ let computerChoice = "";
 
 // EVENT LISTENERS
 humanTools.forEach((item) => {
-  item.addEventListener("click", (e) => {
-    e.target.classList.add("yellow-background");
-    humanChoice = e.target.getAttribute("name");
-    computerChoice = getComputerChoice();
-    computerTools.forEach((item) => {
-      if (item.getAttribute("name") === computerChoice) {
-        item.classList.add("yellow-background");
-      }
-    });
-
-    playRound(humanChoice, computerChoice, e);
-    endGame(humanScoreValue, computerScoreValue);
-  });
+  item.addEventListener("click", handleHumanChoice);
 });
 
 // RESET GAME OR PLAY AGAIN GAME
-playAgain.addEventListener("click", () => {
-  humanScoreValue = 0;
-  computerScoreValue = 0;
-  humanScore.textContent = humanScoreValue;
-  computerScore.textContent = computerScoreValue;
-  humanTools.forEach((item) => {
-    item.removeAttribute("disabled");
-  });
-  winnerMessage.classList.add("hide");
-  playAgain.classList.add("hide");
-});
+playAgain.addEventListener("click", resetGame);
 
 // FUNCTIONS
+function handleHumanChoice(e) {
+  if (humanChoice !== "") return; // Prevent selecting multiple choices during the round
+  const selectedTool = e.target;
+  selectedTool.classList.add("yellow-background");
+  humanChoice = selectedTool.getAttribute("name");
+  computerChoice = getComputerChoice();
+  computerTools.forEach((item) => {
+    if (item.getAttribute("name") === computerChoice) {
+      item.classList.add("yellow-background");
+    }
+  });
+
+  playRound();
+}
+
 function getComputerChoice() {
   return options[Math.floor(Math.random() * options.length)];
 }
 
-function playRound(humanChoice, computerChoice, humanTargetEvent) {
-  if (humanChoice === "rock" && computerChoice === "scissors") {
-    humanScoreValue++;
-  } else if (humanChoice === "paper" && computerChoice === "rock") {
-    humanScoreValue++;
-  } else if (humanChoice === "scissors" && computerChoice === "paper") {
-    humanScoreValue++;
-  } else if (humanChoice === computerChoice) {
+function playRound() {
+  let roundResult = 0; // 0: Draw, 1: Human Wins, -1: Computer Wins
+  if (humanChoice === computerChoice) {
+    roundResult = 0;
+  } else if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")
+  ) {
+    roundResult = 1;
   } else {
+    roundResult = -1;
+  }
+
+  if (roundResult === 1) {
+    humanScoreValue++;
+  } else if (roundResult === -1) {
     computerScoreValue++;
   }
 
@@ -69,11 +70,19 @@ function playRound(humanChoice, computerChoice, humanTargetEvent) {
         item.classList.remove("yellow-background");
       }
     });
-    humanTargetEvent.target.classList.remove("yellow-background");
+    humanTools.forEach((item) => {
+      if (item.getAttribute("name") === humanChoice) {
+        item.classList.remove("yellow-background");
+      }
+    });
+
+    humanChoice = ""; // Reset human choice for the next round
   }, 2000);
+
+  endGame();
 }
 
-function endGame(humanScoreValue, computerScoreValue) {
+function endGame() {
   if (humanScoreValue === 5 || computerScoreValue === 5) {
     const winner = humanScoreValue === 5 ? "PLAYER" : "COMPUTER";
     winnerMessage.textContent = "WINNER: " + winner;
@@ -83,4 +92,16 @@ function endGame(humanScoreValue, computerScoreValue) {
       item.disabled = true;
     });
   }
+}
+
+function resetGame() {
+  humanScoreValue = 0;
+  computerScoreValue = 0;
+  humanScore.textContent = humanScoreValue;
+  computerScore.textContent = computerScoreValue;
+  humanTools.forEach((item) => {
+    item.removeAttribute("disabled");
+  });
+  winnerMessage.classList.add("hide");
+  playAgain.classList.add("hide");
 }
